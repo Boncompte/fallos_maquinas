@@ -27,6 +27,9 @@ def login():
         else:
             return render_template("login.html", error="Usuario o contraseña incorrectos.")
 
+    return render_template("login.html")
+
+
 # Página de consulta (disponible para todos)
 @app.route("/consulta")
 def consulta():
