@@ -17,17 +17,15 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        
+
         # Verificar usuario y contraseña en la tabla "users"
         user = supabase.table("users").select("*").eq("username", username).execute()
-        if user.data and user.data[0]["password"] == password:
+        if user.data and len(user.data) > 0 and user.data[0]["password"] == password:
             session["user"] = user.data[0]["username"]
             session["role"] = user.data[0]["role"]
             return redirect(url_for("consulta"))
         else:
             return render_template("login.html", error="Usuario o contraseña incorrectos.")
-
-    return render_template("login.html")
 
 # Página de consulta (disponible para todos)
 @app.route("/consulta")
