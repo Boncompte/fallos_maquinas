@@ -11,15 +11,13 @@ SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
-
 # Página de inicio (login)
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-
+        
         # Verificar usuario y contraseña en la tabla "users"
         user = supabase.table("users").select("*").eq("username", username).execute()
         if user.data and user.data[0]["password"] == password:
