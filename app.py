@@ -17,17 +17,17 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form["email"]
+        username = request.form["username"]
         password = request.form["password"]
 
-        # Autenticación en Supabase
-        try:
-            user = supabase.auth.sign_in_with_password({"email": email, "password": password})
-            session["user"] = user["user"]
-            session["role"] = user["data"]["role"]  # Asume que el rol está en los datos del usuario
+        # Verificar usuario y contraseña en la tabla "users"
+        user = supabase.table("users").select("*").eq("username", username).execute()
+        if user.data and user.data[0]["password"] == password:
+            session["user"] = user.data[0]["username"]
+            session["role"] = user.data[0]["role"]
             return redirect(url_for("consulta"))
-        except Exception as e:
-            return render_template("login.html", error="Login fallido. Por favor, revisa tus credenciales.")
+        else:
+            return render_template("login.html", error="Usuario o contraseña incorrectos.")
 
     return render_template("login.html")
 
