@@ -1,2 +1,3 @@
 flask
-supabase
+supabase==0.2.8
+gunicorn
