@@ -6,8 +6,9 @@ app = Flask(__name__)
 app.secret_key = "supersecretkey"  # Cambia esto por algo más seguro
 
 # Configuración de Supabase
-SUPABASE_URL = "TU_URL_DE_SUPABASE"
-SUPABASE_KEY = "TU_CLAVE_API_DE_SUPABASE"
+SUPABASE_URL = https://mkajuzdzzljrykquvkje.supabase.co
+SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rYWp1emR6emxqcnlrcXV2a2plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU1OTg5ODksImV4cCI6MjA1MTE3NDk4OX0.D_AYE0rawTVdpJzf5JHpBVZ4ZVw13rpXiWijFs3dZ3M
+
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Página de inicio (login)
